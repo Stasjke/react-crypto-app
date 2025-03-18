@@ -25,7 +25,7 @@ const validateMessages = {
 	},
 };
 
-export default function AddAssetForm({ onClose }) {
+export default function AddAssetForm({ onClose, onReopen }) {
 	const [form] = Form.useForm();
 	const { crypto, addAsset } = useCrypto();
 	const [coin, setCoin] = useState(null);
@@ -42,7 +42,7 @@ export default function AddAssetForm({ onClose }) {
 					<Button type="primary" key="console" onClick={onClose}>
 						Go Console
 					</Button>,
-					<Button key="buy">Buy Again</Button>,
+					<Button key="buy"> Buy Again</Button>,
 				]}
 			/>
 		);

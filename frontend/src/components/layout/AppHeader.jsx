@@ -1,28 +1,30 @@
-import { Layout, Select, Space, Button, Modal, Drawer } from 'antd';
+import { Layout, Select, Space, Button, Modal, Drawer, Switch } from 'antd';
 import { useCrypto } from '../../context/crypto-context';
 import { useEffect, useState } from 'react';
 import CoinInfoModal from '../CoinInfoModal';
 import AddAssetForm from '../AddAssetForm';
-const headerStyle = {
-	width: '100%',
-	textAlign: 'center',
-	height: 60,
-	padding: '1rem',
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
-};
 
 const handleChange = (value) => {
 	console.log(`selected ${value}`);
 };
 
-export default function AppHeader() {
+export default function AppHeader({ setBackground, isDarkTheme }) {
 	const [select, setSelect] = useState(false);
 	const [coin, setCoin] = useState(null);
-	const [modal, setModal] = useState();
+	const [modal, setModal] = useState(false);
 	const [drawer, setDrawer] = useState(false);
 	const { crypto } = useCrypto();
+
+	const headerStyle = {
+		width: '100%',
+		textAlign: 'center',
+		height: 60,
+		padding: '1rem',
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		background: isDarkTheme ? 'black' : 'white',
+	};
 
 	useEffect(() => {
 		const keypress = (event) => {
@@ -65,6 +67,15 @@ export default function AppHeader() {
 					</Space>
 				)}
 			/>
+
+			<Switch
+				checkedChildren="white"
+				unCheckedChildren="black"
+				defaultChecked
+				onChange={setBackground}
+				style={{ marginLeft: '50vh' }}
+			/>
+
 			<Button type="primary" onClick={() => setDrawer(true)}>
 				Add Asset{' '}
 			</Button>
